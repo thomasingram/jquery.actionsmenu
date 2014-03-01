@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+	<head>
+		<meta charset="utf-8">
+		<title>jQuery actionsmenu plugin v1.1</title>
+		<link href="dependencies/jquery.actionsmenu-1.1.css" rel="stylesheet">
+		<link href="prettify.css" rel="stylesheet">
+		<style>
+		
+			/* see jquery.actionsmenu-1.1.css for plugin styles */
+			*{margin:0;padding:0;}
+			body{background-color:#fff;color:#4d4d4d;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:100%;line-height:1.25;}
+			h2{color:#262626;font-size:1.75em;font-weight:normal;line-height:1;margin:.714em 0;}
+			p,ol,ul{font-size:.813em;line-height:1.538;margin:1.538em 0;}
+			ol,ul{list-style-position:inside;}
+			ol ul,ul ul{font-size:1em;margin:0;padding-left:1.538em;}
+			ol.num_removed{list-style:none;}
+			a:link,a:visited{color:#2276bb;}
+			em{color:#262626;font-style:normal;font-weight:bold;}
+			pre,code{background-color:#e5e5e5;}
+			pre{margin:1.25em 0;padding:.625em;}
+			code{font-family:Consolas,Monaco,'Courier New',Courier,monospace;font-size:.923em;line-height:1.667;}
+			footer{border-top:1px solid #ccc;display:block;}
+			#container{margin:0 auto;max-width:58.75em;overflow:hidden;padding:2.5em 1.25em 0;}
+			
+			a.twitter {
+				background: #22b5e5;
+				color: #fff;
+				display: block;
+				font-size: .938em; /* 15px */
+				line-height: 1.6;
+				opacity: .9;
+				padding: .4em .667em; /* 6px 10px */
+				position: absolute;
+				right: 10px;
+				text-decoration: none;
+				top: 10px;
+				z-index: 2;
+				-moz-border-radius: .333em;
+				-webkit-border-radius: .333em;
+				border-radius: .333em; /* 5px */
+			}
+
+		</style>
+		<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		
+		ga('create', 'UA-43666389-1', 'madebykinship.com');
+		ga('send', 'pageview');
+		</script>
+	</head>
+	<body onload="prettyPrint()">
+		<div id="container">
+			
+			<div id="mail_actions"> <!-- wrapping element -->
+				<h2>Mail actions</h2> <!-- menu button label (h1–h6) -->
+				<ul>
+					<!-- links should point to equivalent, non-scripted functionality -->
+					<li><a href="#" id="mark_read">Mark as read</a></li>
+					<li><a href="#" id="add_tasks">Add to Tasks</a></li>
+					<li><a href="#" id="add_star">Add star</a></li>
+					<li><a href="#" id="filter_messages">Filter messages like these</a></li>
+					<li><a href="#" id="mute">Mute</a></li>
+				</ul>
+			</div> <!-- end demo -->
+			
+			<div id="photo_actions">
+				<h2>Photo actions</h2>
+				<ul>
+					<li>
+						<ul>
+							<li><a href="#" id="add_tag">Add a tag</a></li>
+							<li><a href="#" id="add_note">Add a note</a></li>
+							<li><a href="#" id="add_person">Add a person</a></li>
+						</ul>
+					</li>
+					<li>
+						<ul>
+							<li><a href="#" id="add_gallery">Add to a gallery</a></li>
+							<li><a href="#" id="invite_group">Invite to a group</a></li>
+						</ul>
+					</li>
+					<li>
+						<ul>
+							<li><a class="foo bar" href="#" id="view_sizes" title="bar">View all sizes</a></li>
+							<li><a href="#" id="view_slideshow">View slideshow</a></li>
+							<li><a class="actions_view_exif" href="#" id="view_exif" title="Exchangeable image file format">View Exif info</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div> <!-- end demo -->
+			
+			<p>This <a href="http://jquery.com/">jQuery</a> plugin makes it easy to <em>provide access to functions from a drop-down menu</em>. Includes accessibility features like <a href="#aria_roles_properties"><abbr title="Accessible Rich Internet Applications">WAI-ARIA</abbr></a> and <a href="#keyboard_shortcuts">keyboard support</a> for universal access.</p>
+			<p><a href="download.php"><strong>Download jquery.actionsmenu-1.1.zip</strong></a></p>
+			<a class="twitter" href="https://twitter.com/madebykinship" rel="me">For updates, follow us on Twitter</a>
+			<script type="text/javascript"><!--
+			google_ad_client = "ca-pub-0847361107812160";
+			/* jquery-actionsmenu */
+			google_ad_slot = "3722868801";
+			google_ad_width = 728;
+			google_ad_height = 90;
+			//-->
+			</script>
+			<script type="text/javascript"
+			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+			</script>
+			<h2>Setup</h2>
+			<ol>
+				<li><a href="download.php">Download</a> the plugin.</li>
+				<li>Include the script to your page(s) just before the <code>&#60;/body&#62;</code> tag.
+					<pre><code class="prettyprint">&#60;!-- grab latest version of jQuery --&#62;
+&#60;script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"&#62;&#60;/script&#62;
+&#60;script src="jquery.actionsmenu-1.1.js"&#62;&#60;/script&#62;</code></pre>
+				</li>
+				<li>Include the <abbr>CSS</abbr> to the head of your page(s).
+					<pre><code class="prettyprint">&#60;link href="jquery.actionsmenu-1.1.css" rel="stylesheet"&#62;</code></pre>
+				</li>
+			</ol>
+			<h2>Usage</h2>
+			<ol>
+				<li>Add the basic <abbr>HTML</abbr> where you want the menu to appear on your page(s).
+					<pre><code class="prettyprint">&#60;div id="mail_actions"&#62; &#60;!-- wrapping element --&#62;
+	&#60;h2&#62;Mail actions&#60;/h2&#62; &#60;!-- menu button label (h1–h6) --&#62;
+	&#60;ul&#62;
+		&#60;!-- links should point to equivalent, non-scripted functionality --&#62;
+		&#60;li&#62;&#60;a id="mark_read" href="#"&#62;Mark as read&#60;/a&#62;&#60;/li&#62;
+		&#60;li&#62;&#60;a id="add_tasks" href="#"&#62;Add to Tasks&#60;/a&#62;&#60;/li&#62;
+		&#60;li&#62;&#60;a id="add_star" href="#"&#62;Add star&#60;/a&#62;&#60;/li&#62;
+		&#60;li&#62;&#60;a id="filter_messages" href="#"&#62;Filter messages like these&#60;/a&#62;&#60;/li&#62;
+		&#60;li&#62;&#60;a id="mute" href="#"&#62;Mute&#60;/a&#62;&#60;/li&#62;
+	&#60;/ul&#62;
+&#60;/div&#62;</code></pre>
+				</li>
+				<li>Activate the plugin by calling <code>actionsmenu()</code> on the wrapping element.
+					<pre><code class="prettyprint">&#60;script&#62;
+$('#mail_actions').actionsmenu();
+&#60;/script&#62;</code></pre>
+				</li>
+				<li>Attach an event handler to the menu to listen for click events.
+					<pre><code class="prettyprint">$('#mail_actions_menu').delegate('a', 'click', function () {
+	// figure out which menu item was clicked
+	switch ($(this).attr('id')) {
+	case 'mark_read':
+		// do something
+		return false;
+	case 'add_tasks':
+		// do something
+		return false;
+	// etc.
+	}
+});</code></pre>
+				</li>
+			</ol>
+			<h2>Notes on usage</h2>
+			<ul>
+				<li><em>Options</em> (defaults shown):
+					<pre><code class="prettyprint">$('#mail_actions').actionsmenu({
+	maxHeight: 300, // maximum height of the menu, if the height is exceeded a scroll bar will appear
+	width: 180, // specify the menu&#8217;s width
+	css: {
+		ids: {
+			button: '_button', // mail_actions_button
+			menu: '_menu' // mail_actions_menu
+		},
+		classes: {
+			button: 'actions_menu_button',
+			menu: 'actions_menu',
+			separator: 'separator',
+			hidden: 'actions_menu_hidden',
+			active: 'actions_menu_button_active'
+		}
+	}
+});</code></pre>
+				</li>
+				<li>Menu items may be grouped using a nested <code>&#60;ul&#62;</code>.
+					<pre><code class="prettyprint">&#60;li&#62;
+	&#60;ul&#62;
+		&#60;li&#62;&#60;a id="add_tag" href="#"&#62;Add a tag&#60;/a&#62;&#60;/li&#62;
+		&#60;li&#62;&#60;a id="add_note" href="#"&#62;Add a note&#60;/a&#62;&#60;/li&#62;
+		&#60;li&#62;&#60;a id="add_person" href="#"&#62;Add a person&#60;/a&#62;&#60;/li&#62;
+	&#60;/ul&#62; &#60;!-- end group --&#62;
+&#60;/li&#62;</code></pre>
+				</li>
+				<li>Classes may be added to menu items by adding them to the corresponding <code>&#60;a&#62;</code> (that&#8217;s how the icon was added in the demo).
+					<pre><code class="prettyprint">&#60;li&#62;&#60;a class="actions_view_exif" href="#" id="view_exif" title="Exchangeable image file format"&#62;View Exif info&#60;/a&#62;&#60;/li&#62;</code></pre>
+				</li>
+				<li>Thanks for downloading, <a href="mailto:thomasaingram@gmail.com">questions, comments, or suggestions</a> are welcome.</li>
+			</ul>
+			<h2 id="keyboard_shortcuts">Keyboard shortcuts</h2>
+			<ul>
+				<li>If the menu button has focus and the menu is not open, then:
+					<ul>
+						<li><em>Enter, Spacebar, or the up or down arrow keys</em> opens the menu and places focus on the first menu item.</li>
+					</ul>
+				</li>
+				<li>When the menu is open and focus is on a menu item, then:
+					<ul>
+						<li><em>Enter or Spacebar</em> invokes that menu action.</li>
+						<li><em>Up or down arrow keys</em> cycles focus through the items.</li>
+						<li><em>Escape</em> closes the menu and returns focus to the menu button.</li>
+					</ul>
+				</li>
+				<li><em>Tabbing</em> out of the menu component closes the menu if open.</li>
+			</ul>
+			<!-- <p>Reference: <a href="http://dev.aol.com/dhtml_style_guide#menu"><abbr title="Dynamic HTML">DHTML</abbr> Style Guide</a></p> -->
+			<h2 id="aria_roles_properties">ARIA roles and properties</h2>
+			<ul>
+				<li>Roles:
+					<ul>
+						<li><code>role="application"</code></li>
+						<li><code>role="menu"</code></li>
+						<li><code>role="menuitem"</code></li>
+					</ul>
+				</li>
+				<li>States and properties:
+					<ul>
+						<li><code>aria-disabled</code></li>
+						<li><code>aria-haspopup</code></li>
+						<li><code>aria-hidden</code></li>
+						<li><code>aria-labelledby</code></li>
+						<li><code>aria-owns</code></li>
+					</ul>
+				</li>
+			</ul>
+			<p>Reference: <a href="http://www.w3.org/TR/wai-aria/">Accessible Rich Internet Applications (WAI-ARIA) 1.0</a></p>
+			<h2>Change log</h2>
+			<ol class="num_removed">
+				<li><em>v1.1</em> &#8211; 5 Sep 2010
+					<ul>
+						<li>Added collision detection (bottom or right edge of the screen) for the opening of the menu (removed <code>openLeft</code> option).</li>
+						<li>Added <abbr>CSS</abbr> ids/classes to config.</li>
+						<li>Check made for <code>role</code> attribute on body before setting.</li>
+						<li>Added <code>-o-box-shadow</code> to <abbr>CSS</abbr> where applicable.</li>
+						<li>Removed Lucida Sans Unicode and Lucida Sans from the font stack.</li>
+						<li>Added <code>title</code> to the list of attributes carried over to the corresponding <code>&#60;a&#62;</code>.</li>
+					</ul>
+				</li>
+			</ol>
+			<footer>
+				<p>Copyright &#169; <?php echo date('Y'); ?> <a href="/">Kinship</a>. For updates, <a href="https://twitter.com/madebykinship" rel="me">follow us on Twitter</a>. Released under the <a href="http://www.opensource.org/licenses/mit-license.php" rel="license"><abbr title="Massachusetts Institute of Technology">MIT</abbr> License</a>.</p>
+			</footer>
+		</div>
+		<script src="dependencies/jquery-1.4.2.min.js"></script>
+		<script src="jquery.actionsmenu-1.1.source.js"></script>
+		<script src="prettify.js"></script>
+		<script>
+		
+			$(document).ready(function () {
+				$('#mail_actions').actionsmenu({width: 200});
+				$('#photo_actions').actionsmenu();
+				
+				// attach event handler to the menu (.delegate() – added in jQuery 1.4.2)
+				$('#mail_actions_menu').delegate('a', 'click', function () {
+					// figure out which menu item was clicked
+					switch ($(this).attr('id')) {
+					case 'mark_read':
+						// do something
+						return false;
+					case 'add_tasks':
+						// do something
+						return false;
+					// etc.
+					}
+				});
+			});
+		
+		</script>
+	</body>
+</html>
